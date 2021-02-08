@@ -26,16 +26,6 @@ type Msg =
     | AddOne
     | SetIsChecked of bool
 
-module AppSub =
-    // A "dispatch" function which can send an Analysis message to the update function
-    // This is mutable and a dummy function initially because we don't have access to it yet
-    let mutable privateDispatch: (Msg -> unit) = ignore
-
-    let dispatch msg = privateDispatch msg
-    // A "sub" which is wired into the main Elmish program (in App.fs).
-    // It has a dispatch function which we can assign to our mutable dispatch function above.
-    let sub _ = (fun d -> privateDispatch <- d) |> Elmish.Cmd.ofSub
-
 let update msg model =
     match msg, model with
     | NoOp, _ -> model, []
@@ -62,18 +52,16 @@ let bindings () = [
 let bindCmd = function
     | CmdMsg.NoOp -> Cmd.ofMsg NoOp
 
-let registerEvents (fwkElement: FrameworkElement) =
+let registerEvents (fwkElement: FrameworkElement) dispatch =
     fwkElement.KeyDown
     |> Observable.filter (fun ev -> ev.Key = Key.D && ev.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Control))
     // Idea would be to have access to some IObs<Model> which I could combine and filter-on here
     // so that I don't trigger the AddOne when the command is disabled
-    |> Observable.add (fun _ -> AddOne |> AppSub.dispatch)
+    |> Observable.add (fun _ -> AddOne |> dispatch)
 
 let main fwkElement =
-    registerEvents fwkElement
-
     Program.mkProgramWpfWithCmdMsg init update bindings bindCmd
-    |> Program.withSubscription (AppSub.sub)
+    |> Program.withSubscription (fun _ -> Cmd.ofSub (registerEvents fwkElement))
     |> Program.startElmishLoop
         { ElmConfig.Default with
             LogConsole = true
