@@ -14,10 +14,14 @@ type Model =
 type CmdMsg =
     | NoOp
 
+let modelObs = new System.Reactive.Subjects.Subject<Model>()
+
 let init () =
     let model =
         { IsChecked = false
           Count = 0u }
+
+    modelObs.OnNext(model)
 
     model, []
 
@@ -37,13 +41,16 @@ module AppSub =
     let sub _ = (fun d -> privateDispatch <- d) |> Elmish.Cmd.ofSub
 
 let update msg model =
-    match msg, model with
-    | NoOp, _ -> model, []
-    | AddOne, { IsChecked = false } -> { model with Count = model.Count + 1u }, []
-    // I need to handle this case and do nothing but ideally I don't want to care
-    // and would like to not have the specific case here.
-    | AddOne, { IsChecked = true } -> model, []
-    | SetIsChecked v, _ -> { model with IsChecked = v }, []
+    let model', msgCmds =
+        match msg, model with
+        | NoOp, _ -> model, []
+        | AddOne, { IsChecked = false } -> { model with Count = model.Count + 1u }, []
+        | SetIsChecked v, _ -> { model with IsChecked = v }, []
+        | _ -> failwith "Unexpected state"
+
+    modelObs.OnNext(model')
+
+    model', msgCmds
 
 
 let bindings () = [
@@ -65,6 +72,8 @@ let bindCmd = function
 let registerEvents (fwkElement: FrameworkElement) =
     fwkElement.KeyDown
     |> Observable.filter (fun ev -> ev.Key = Key.D && ev.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Control))
+    |> Observable.withLatestFrom (fun _ m -> m) modelObs
+    |> Observable.filter (fun m -> not m.IsChecked)
     // Idea would be to have access to some IObs<Model> which I could combine and filter-on here
     // so that I don't trigger the AddOne when the command is disabled
     |> Observable.add (fun _ -> AddOne |> AppSub.dispatch)
