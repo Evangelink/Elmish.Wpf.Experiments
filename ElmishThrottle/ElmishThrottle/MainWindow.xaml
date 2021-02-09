@@ -11,6 +11,6 @@
                 IsMoveToPointEnabled="True" IsSelectionRangeEnabled="False" LargeChange="5"
                 Maximum="{Binding FrameMaxIndex, FallbackValue=1, TargetNullValue=1}"
                 Minimum="0" SmallChange="1"
-                Value="{Binding CurrentFrameIndex}" />
+                Value="{Binding CurrentFrameIndex, Mode=TwoWay, Delay=100}" />
     </StackPanel>
 </Window>
