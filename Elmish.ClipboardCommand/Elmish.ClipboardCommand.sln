@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30914.41
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elmish.ClipboardCommand", "Elmish.ClipboardCommand\Elmish.ClipboardCommand.csproj", "{D65F4344-1A69-4567-B765-4F916693E30C}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Elmish.ClipboardCommand.Core", "Elmish.ClipboardCommand.Core\Elmish.ClipboardCommand.Core.fsproj", "{82F05E7D-7309-4C2C-A4F1-80C443CFA5B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D65F4344-1A69-4567-B765-4F916693E30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D65F4344-1A69-4567-B765-4F916693E30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D65F4344-1A69-4567-B765-4F916693E30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D65F4344-1A69-4567-B765-4F916693E30C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F05E7D-7309-4C2C-A4F1-80C443CFA5B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F05E7D-7309-4C2C-A4F1-80C443CFA5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F05E7D-7309-4C2C-A4F1-80C443CFA5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F05E7D-7309-4C2C-A4F1-80C443CFA5B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F0810CF-1F95-45EC-877D-F33B31FC2A20}
+	EndGlobalSection
+EndGlobal
