@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30803.129
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElmishEventModelObservable", "ElmishEventModelObservable\ElmishEventModelObservable.csproj", "{1BAAB05B-D7C8-472E-AB30-5054913CFF0D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ElmishEventModelObservable.Core", "ElmishEventModelObservable.Core\ElmishEventModelObservable.Core.fsproj", "{ED79E2B6-0261-4545-8E53-4EC94E78EA40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BAAB05B-D7C8-472E-AB30-5054913CFF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BAAB05B-D7C8-472E-AB30-5054913CFF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BAAB05B-D7C8-472E-AB30-5054913CFF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BAAB05B-D7C8-472E-AB30-5054913CFF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED79E2B6-0261-4545-8E53-4EC94E78EA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED79E2B6-0261-4545-8E53-4EC94E78EA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED79E2B6-0261-4545-8E53-4EC94E78EA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED79E2B6-0261-4545-8E53-4EC94E78EA40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D29EF8D7-9696-43C9-A8CF-104CFD41D19E}
+	EndGlobalSection
+EndGlobal
