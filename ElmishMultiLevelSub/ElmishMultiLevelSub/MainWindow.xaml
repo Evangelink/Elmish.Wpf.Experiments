@@ -1,0 +1,22 @@
+﻿<Window
+    x:Class="ElmishEventModel.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ElmishEventModel"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock DataContext="{Binding CounterByOne}">
+            <Run Text="CountByOne :" />
+            <Run Text="{Binding Counter, UpdateSourceTrigger=PropertyChanged}" />
+        </TextBlock>
+        <TextBlock DataContext="{Binding CounterByTwo}">
+            <Run Text="CountByTwo :" />
+            <Run Text="{Binding Counter, UpdateSourceTrigger=PropertyChanged}" />
+        </TextBlock>
+    </StackPanel>
+</Window>
