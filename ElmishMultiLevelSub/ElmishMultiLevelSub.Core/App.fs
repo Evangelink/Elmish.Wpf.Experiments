@@ -11,11 +11,8 @@ type CmdMsg =
     | NoOp
 
 let init () =
-    let model =
-        { CounterByOne = CounterByOne.init ()
-          CounterByTwo = CounterByTwo.init ()}
-
-    model
+    { CounterByOne = CounterByOne.init ()
+      CounterByTwo = CounterByTwo.init () }
 
 type Msg =
     | CounterByOneMsg of CounterByOne.Msg
@@ -44,8 +41,8 @@ let bindings () = [
 let main fwkElement =
     Program.mkSimpleWpf init update bindings
     // TODO: Simplify this call to use Cmd.ofSub
-    |> Program.withSubscription (fun x -> CounterByOne.Platform.CounterByOneSub.sub x |> Cmd.map Msg.CounterByOneMsg)
-    |> Program.withSubscription (fun x -> CounterByTwo.Platform.CounterByTwoSub.sub x |> Cmd.map Msg.CounterByTwoMsg)
+    |> Program.withSubscription (CounterByOne.Platform.CounterByOneSub.sub >> Cmd.map Msg.CounterByOneMsg)
+    |> Program.withSubscription (CounterByTwo.Platform.CounterByTwoSub.sub >> Cmd.map Msg.CounterByTwoMsg)
     |> Program.startElmishLoop
         { ElmConfig.Default with
             LogConsole = true

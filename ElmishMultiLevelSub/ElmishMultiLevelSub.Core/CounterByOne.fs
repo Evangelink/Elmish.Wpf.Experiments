@@ -3,14 +3,12 @@
 open Elmish.WPF
 open Utils
 
-type Model =
-    { Counter: int }
+type Model = { Counter: int }
 
 type Msg =
     | Increment
 
-let init () =
-    { Counter = 0 }
+let init () = { Counter = 0 }
 
 let update msg m =
     match msg with
@@ -18,7 +16,7 @@ let update msg m =
 
 module Platform =
 
-    let bindings () : Binding<Model, Msg> list = [
+    let bindings () = [
         "Counter" |> Binding.oneWay (fun r -> r.Counter)
     ]
 
@@ -30,8 +28,6 @@ module Platform =
         let sub x = handler.Sub x
 
     let timerTick =
-      let timer = new System.Timers.Timer(100.)
-      timer.Elapsed.Add (fun _ ->
-        CounterByOneSub.dispatch <| Increment
-      )
-      timer.Start()
+        let timer = new System.Timers.Timer 100.
+        timer.Elapsed.Add(fun _ -> CounterByOneSub.dispatch <| Increment)
+        timer.Start ()
