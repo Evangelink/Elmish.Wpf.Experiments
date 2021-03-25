@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Utils.fs" />
     <Compile Include="CounterByOne.fs" />
     <Compile Include="CounterByTwo.fs" />
     <Compile Include="App.fs" />
