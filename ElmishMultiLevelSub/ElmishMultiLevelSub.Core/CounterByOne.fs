@@ -1,7 +1,6 @@
 ﻿module CounterByOne
 
 open Elmish.WPF
-open Utils
 
 type Model = { Counter: int }
 
@@ -20,14 +19,9 @@ module Platform =
         "Counter" |> Binding.oneWay (fun r -> r.Counter)
     ]
 
-    // TODO: Get rid of this module
     [<RequireQualifiedAccess>]
     module CounterByOneSub =
-        let private handler = GenericSub<Msg>()
-        let dispatch msg = handler.Dispatch msg
-        let sub x = handler.Sub x
-
-    let timerTick =
-        let timer = new System.Timers.Timer 100.
-        timer.Elapsed.Add(fun _ -> CounterByOneSub.dispatch <| Increment)
-        timer.Start ()
+        let sub dispatch =
+            let timer = new System.Timers.Timer 100.
+            timer.Elapsed.Add(fun _ -> dispatch Increment)
+            timer.Start ()

@@ -40,9 +40,8 @@ let bindings () = [
 
 let main fwkElement =
     Program.mkSimpleWpf init update bindings
-    // TODO: Simplify this call to use Cmd.ofSub
-    |> Program.withSubscription (CounterByOne.Platform.CounterByOneSub.sub >> Cmd.map Msg.CounterByOneMsg)
-    |> Program.withSubscription (CounterByTwo.Platform.CounterByTwoSub.sub >> Cmd.map Msg.CounterByTwoMsg)
+    |> Program.withSubscription (fun _ -> CounterByOne.Platform.CounterByOneSub.sub |> Cmd.ofSub |> Cmd.map Msg.CounterByOneMsg)
+    |> Program.withSubscription (fun _ -> CounterByTwo.Platform.CounterByTwoSub.sub |> Cmd.ofSub |> Cmd.map Msg.CounterByTwoMsg)
     |> Program.startElmishLoop
         { ElmConfig.Default with
             LogConsole = true
