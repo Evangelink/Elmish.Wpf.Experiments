@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Elmish.PreventAppClose.Core\Elmish.PreventAppClose.Core.fsproj" />
+    <ProjectReference Include="..\Elmish.PreventAppClose.Core2\Elmish.PreventAppClose.Core2.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\third-parties\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\third-parties\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\third-parties\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Themes.Fluent">
+      <HintPath>..\third-parties\Telerik.Windows.Themes.Fluent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
