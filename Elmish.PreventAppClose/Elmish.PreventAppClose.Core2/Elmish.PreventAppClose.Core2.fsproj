@@ -15,6 +15,9 @@
   <ItemGroup>
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsBase" />
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\third-parties\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

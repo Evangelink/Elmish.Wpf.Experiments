@@ -40,7 +40,7 @@ let update msg model =
     match msg, model with
     | NoOp, _ -> model, []
 
-    | RequestClose Start, { HasUnsavedChanges = false } -> model, []
+    | RequestClose Start, { HasUnsavedChanges = false } -> model, [ ShutdownApp ]
 
     | RequestClose Finish, _ -> model, [ ShutdownApp ]
 
@@ -54,9 +54,12 @@ let update msg model =
 
     | Saved, _ -> { model with HasUnsavedChanges = false }, []
 
-let bindings () = []
-
-let mutable cancelCloseAction = Action(fun () -> ())
+let bindings () = [
+  "PreviewClosed" |> Binding.cmdParam (fun obj ->
+    let args = obj :?> Telerik.Windows.Controls.WindowPreviewClosedEventArgs
+    args.Cancel <- true
+    RequestClose Start)
+]
 
 [<RequireQualifiedAccess>]
 module Dispatch =
@@ -77,8 +80,7 @@ module Dialogs =
             | MessageBoxResult.No -> DontSaveChanges
             | _ -> CancelChanges)
 
-let askUserUnsavedChangesAction (cancelCloseAction: Action) () = async {
-    cancelCloseAction.Invoke()
+let askUserUnsavedChangesAction () = async {
     let! result = Dialogs.promptUser ()
 
     return
@@ -91,7 +93,7 @@ let askUserUnsavedChangesAction (cancelCloseAction: Action) () = async {
 let cmdMsgToCmd = function
     | AskSaveOrNotOrCancel ->
         Cmd.OfAsync.either
-            (askUserUnsavedChangesAction cancelCloseAction)
+            askUserUnsavedChangesAction
             ()
             id
             CmdException
@@ -100,12 +102,12 @@ let cmdMsgToCmd = function
         Application.Current.Shutdown ()
         Cmd.none
 
-let main window (previewCloseObs: IObservable<Action>) =
-    let onPreviewClose dispatch =
-        previewCloseObs |> Observable.add (fun cancelClose ->
-            cancelCloseAction <- cancelClose
-            dispatch (RequestClose Start))
+let main window =
+    //let onPreviewClose dispatch =
+    //    previewCloseObs |> Observable.add (fun cancelClose ->
+    //        cancelCloseAction <- cancelClose
+    //        dispatch (RequestClose Start))
 
     WpfProgram.mkProgramWithCmdMsg init update bindings cmdMsgToCmd
-    |> WpfProgram.withSubscription (fun _ -> Cmd.ofSub onPreviewClose)
+    //|> WpfProgram.withSubscription (fun _ -> Cmd.ofSub onPreviewClose)
     |> WpfProgram.startElmishLoop window

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="System.Reactive.Linq" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Elmish.PreventAppClose.Core\Elmish.PreventAppClose.Core.fsproj" />
     <ProjectReference Include="..\Elmish.PreventAppClose.Core2\Elmish.PreventAppClose.Core2.fsproj" />
   </ItemGroup>
 

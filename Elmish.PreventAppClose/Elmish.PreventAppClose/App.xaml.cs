@@ -27,7 +27,7 @@
             //ClassLib.App.main(window, previewClosedObs);
 
             // Use this to see incorrect behavior using beta of Elmish.WPF
-            ClassLib2.App.main(window, previewClosedObs);
+            ClassLib2.App.main(window);
         }
     }
 }
